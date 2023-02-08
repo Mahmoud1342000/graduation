@@ -9,15 +9,13 @@ const mongoose = require('mongoose')
 app.use(express.json())
 
 
+app.use('/users',require("./api/user.api"))
 
 
 
-app.get('/model',async (req, res) => {
-
-
+app.get('*', async (req,res)=>{
+    res.json({message:"404 not found page"})
 })
-
-
 
 
 mongoose.connect(process.env.CONNECTION_STRING)
