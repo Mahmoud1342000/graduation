@@ -3,7 +3,7 @@
 
 const mongoose = require('mongoose')
 
-const patientSchema = mongoose.Schema({
+const userSchema = mongoose.Schema({
     name:String,
     email:String,
     password:String,
@@ -14,6 +14,6 @@ const patientSchema = mongoose.Schema({
     }
 })
 
-const userModel = mongoose.model("patient",patientSchema)
+const userModel = mongoose.model("user",userSchema)
 
 module.exports = userModel

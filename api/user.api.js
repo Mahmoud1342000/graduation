@@ -7,8 +7,4 @@ router.post('/signup',userValidation,signup)
 router.post('/signin',signin)
 router.get('/verify/:token',emailVerify)
 
-
-
-
-
 module.exports = router
