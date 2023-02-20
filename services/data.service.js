@@ -25,7 +25,7 @@ async function get_data(array) {
         return output
 
     } catch (e) {
-        console.error(`failed to inference ONNX model: ${e}.`);
+        return res.json(`failed to inference ONNX model: ${e}.`);
     }
 }
 
@@ -35,14 +35,14 @@ module.exports.addData = catchAsyncError(async (req, res,next) => {
     await dataModel.insertMany({array})
     const result = await get_data(array)
     console.log(result);
-    res.status(200).json({ message: "success" , result });
+    return res.status(200).json({ message: "success" , result });
   });
 
 
 module.exports.getAllData = catchAsyncError(async (req, res,next) => {
     let data = await dataModel.find({})
     if (data) {
-        res.status(200).json({ message: "success", data })
+        return res.status(200).json({ message: "success", data })
     } else {
         return next(new AppError("data not found",400))
     }
@@ -53,7 +53,7 @@ module.exports.updateData = catchAsyncError(async (req, res,next) => {
     const { id } = req.params
     let data = await dataModel.findByIdAndUpdate(id, req.body, { new: true })
     if (data) {
-        res.status(200).json({ message: "updated" })
+        return res.status(200).json({ message: "updated" })
     } else {
         return next(new AppError("data not found",400))
     }
@@ -64,7 +64,7 @@ module.exports.deleteData = catchAsyncError(async (req, res,next) => {
     const { id } = req.params
     let data = await dataModel.findByIdAndDelete(id)
     if (data) {
-        res.status(200).json({ message: "deleted" })
+        return res.status(200).json({ message: "deleted" })
     } else {
         return next(new AppError("data not found",400))
     }

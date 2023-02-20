@@ -15,7 +15,7 @@ module.exports.signup = catchAsyncError(async (req, res,next) => {
             await userModel.insertMany({ name, email, password:hash, age, emailConfirm:true })
             let token = jwt.sign({ email }, "verify", { expiresIn: 360 });
             sendEmail({ email, token, message: "hello" });
-            res.status(200).json({ message: "success" })
+            return res.status(200).json({ message: "success" })
         });
     }
 })
@@ -28,9 +28,9 @@ module.exports.signin = catchAsyncError(async (req, res,next) => {
 
     let token = jwt.sign({ userid: user._id, name: user.name, emailConfirm: user.emailConfirm }, process.env.JWT_KEY)
     if (user.emailConfirm == true) {
-        res.status(200).json({ message: "login", token })
+        return res.status(200).json({ message: "login", token })
     } else {
-        res.json({ message: "email not verified" })
+        return res.json({ message: "email not verified" })
     }
 })
 
@@ -38,7 +38,7 @@ module.exports.emailVerify = catchAsyncError(async (req, res,next) => {
     const { token } = req.params;
     jwt.verify(token, "verify", async (err, decoded) => {
         if (err) {
-            res.json(err);
+            return res.json(err);
         } else {
             let user = await userModel.findOne({ email: decoded.email });
             if (user) {
@@ -46,7 +46,7 @@ module.exports.emailVerify = catchAsyncError(async (req, res,next) => {
                     { email: decoded.email },
                     { emailConfirm: true }
                 );
-                res.status(200).json({ message: "verified" });
+                return res.status(200).json({ message: "verified" });
             } else {
                 return next(new AppError("user not found",401))
             }

@@ -25,13 +25,9 @@ module.exports.sendEmail=async(options)=>{
     
 },(err,info)=>{
     if (err) {
-        console.log(err);
+        return res.json(err);
     } else {
-        
-        console.log(info);
+        return res.json(info);
     }
 });
-
-
-
 }

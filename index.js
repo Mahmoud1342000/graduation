@@ -20,11 +20,11 @@ res.json(err.message)
 
 
 app.get('/', async (req,res)=>{
-    res.json({message:"Hello World"})
+    return res.send("Hello World")
 })
 
 app.get('*', async (req,res)=>{
-    res.json({message:"404 not found page"})
+    return res.json({message:"404 not found page"})
 })
 
 
@@ -32,9 +32,9 @@ mongoose.set('strictQuery',true)
 
 mongoose.connect(process.env.CONNECTION_STRING)
 .then(()=>{
-    console.log("database connectd");
+    console.log(`database connectd on ${process.env.CONNECTION_STRING}`);
 }).catch((err)=>{
-    console.log(err);
+    console.log(`fail to connect db ${err}`);
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))

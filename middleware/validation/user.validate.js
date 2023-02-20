@@ -11,16 +11,22 @@ const schema = Joi.object({
 
 
 module.exports.userValidation = (req,res,next)=>{
-    let errorArray = []
-    let {error} = schema.validate(req.body,{abortEarly:false})
-    if (!error) {
-        next()
-    } else {
-        // res.json(error.details[0].message)
-        // res.json(error.message)
-        error.details.map((msg)=>{
-            errorArray.push(msg.message)
-        })
-        res.json(errorArray)
-}
+    try {
+        
+        let errorArray = []
+        let {error} = schema.validate(req.body,{abortEarly:false})
+        if (error) {
+            error.details.map((msg)=>{
+                errorArray.push(msg.message)
+            })
+        }
+        if (errorArray.length>0) {
+            return res.status(400).json(errorArray)
+        } else {
+            return next() 
+        }
+        
+    } catch (error) {
+        return res.status(500).json(error)
+    }
 }
