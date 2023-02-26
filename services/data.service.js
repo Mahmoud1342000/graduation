@@ -36,7 +36,7 @@ module.exports.addData = catchAsyncError(async (req, res,next) => {
         arr.push(req.body[key])
     }
     let array = arr
-    await dataModel.insertMany({array})
+    await dataModel.insertMany(req.body)
     const result = await get_data(array)
     return res.status(200).json({ message: "success" , result });
   });
