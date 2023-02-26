@@ -19,7 +19,7 @@ async function get_data(array) {
         const feeds = {x: tensor};
 
         const results = await session.run(feeds);
-        console.log(results);
+        // console.log(results);
         const output = results[outputName].data;
 
         return output
@@ -31,10 +31,13 @@ async function get_data(array) {
 
 
 module.exports.addData = catchAsyncError(async (req, res,next) => {
-    const {array} = req.body
+    let arr = []
+    for (const key in req.body) {
+        arr.push(req.body[key])
+    }
+    let array = arr
     await dataModel.insertMany({array})
     const result = await get_data(array)
-    console.log(result);
     return res.status(200).json({ message: "success" , result });
   });
 
