@@ -7,7 +7,7 @@ module.exports.auth = (req, res, next) => {
     
     const token = req.header('token')
     
-    jwt.verify(token, process.env.JWT_KEY, async function (err, decoded) {
+    jwt.verify(token, "medical", async function (err, decoded) {
       if (err) {
         return next(new AppError(err,401))
       } else {
