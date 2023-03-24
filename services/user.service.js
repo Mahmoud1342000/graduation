@@ -26,7 +26,7 @@ module.exports.signin = catchAsyncError(async (req, res,next) => {
     if (!user || !(await bcrypt.compare(password,user.password))) 
         return next(new AppError("incorrect email or password",401))
 
-    let token = jwt.sign({ userid: user._id, name: user.name, emailConfirm: user.emailConfirm }, process.env.JWT_KEY)
+    let token = jwt.sign({ userid: user._id, name: user.name, emailConfirm: user.emailConfirm }, "medical")
     if (user.emailConfirm == true) {
         return res.status(200).json({ message: "login", token })
     } else {
