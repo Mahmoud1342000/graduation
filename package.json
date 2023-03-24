@@ -1,0 +1,35 @@
+{
+  "name": "test-00",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "16.x"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.1",
+    "bootstrap": "^5.2.3",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "file-system": "^2.2.2",
+    "fs": "^0.0.1-security",
+    "joi": "^17.7.0",
+    "jsonwebtoken": "^9.0.0",
+    "moment": "^2.29.4",
+    "mongoose": "^6.9.0",
+    "nodemailer": "^6.9.1",
+    "nodemon": "^2.0.20",
+    "onnxjs": "^0.1.8",
+    "onnxruntime-node": "^1.13.1",
+    "onnxruntime-web": "^1.13.1",
+    "xlsx": "^0.18.5",
+    "yarn": "^1.22.19"
+  }
+}
