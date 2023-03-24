@@ -30,9 +30,9 @@ app.get('*', async (req,res)=>{
 
 mongoose.set('strictQuery',true)
 
-mongoose.connect(process.env.CONNECTION_STRING)
+mongoose.connect(mongodb+srv://medical:medical123@cluster0.vh95u7r.mongodb.net/medicalApi)
 .then(()=>{
-    console.log(`database connectd on ${process.env.CONNECTION_STRING}`);
+    console.log(`database connectd on mongodb+srv://medical:medical123@cluster0.vh95u7r.mongodb.net/medicalApi`);
 }).catch((err)=>{
     console.log(`fail to connect db ${err}`);
 })
