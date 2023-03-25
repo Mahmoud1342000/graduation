@@ -66,12 +66,18 @@ module.exports.getAllData = catchAsyncError(async (req, res,next) => {
 
 module.exports.getUserData = catchAsyncError(async (req, res,next) => {
     // const { id } = req.params;
-    console.log(req.id);
-    let userData = await dataModel.find({user:req.id});
+    // console.log(req.id);
+    let user_id = await userModel.findById({_id:req.id})
+    if (user_id) {
+
+    let userData = await dataModel.find({user:req.id}).populate("user","name -_id");
     if (!userData) {
       return next(new AppError(`userData not found`, 400));
     }
     return res.status(200).json(userData);
+} else {
+    return next(new AppError("user does not exist",400))
+}
   });
 
 
